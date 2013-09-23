@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'sinatra/activerecord'
 require 'random_data'
 
 
