@@ -1,2 +1,2 @@
-# require controller
+require './index'
 run Sinatra::Application
