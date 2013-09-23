@@ -5,10 +5,10 @@ ruby '1.9.3'
 gem 'sinatra'
 gem 'sinatra-activerecord'
 gem 'rack-test'
+gem 'random_data'
 
 group :development do
   gem 'shotgun'
-  gem 'random_data'
 end
 
 group :production do
