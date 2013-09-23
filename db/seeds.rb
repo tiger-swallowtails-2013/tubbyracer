@@ -1,2 +1,0 @@
-requrie 'random_data'
-
