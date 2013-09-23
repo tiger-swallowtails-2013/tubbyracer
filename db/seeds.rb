@@ -1,2 +1,3 @@
-requrie 'random_data'
+require 'faker'
+
 

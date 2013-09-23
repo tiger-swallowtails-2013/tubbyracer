@@ -10,6 +10,7 @@ group :development do
   gem 'shotgun'
   gem 'sqlite3'
   gem 'random_data'
+  gem 'faker'
 end
 
 group :production do
