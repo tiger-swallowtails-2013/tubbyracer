@@ -21,31 +21,47 @@
 
       <p id="paragraph"><%= @paragraph %></p>
       <input type="hidden" value=<% @paragraph %> />
-      <textarea name="input"></textarea>
+      <textarea id="input" name="input" onkeyup="listen()"></textarea>
       <button name='submit'>Done!</button>
     </form> 
-  </div>  
+    <a href="#" onclick="start()"> <h2>Start!</h2> </a>
+    </div>  
   
   <script type="text/javascript">
-    var start = document.getElementsByName('input')[0];
+    var input = document.getElementById('input');
+    var text = document.getElementById('paragraph').innerText
+    
     var start_time = 0;
     var finish = document.getElementsByName('submit')[0];
+    var done = false
 
-    start.onfocus = function(){
-      start_time = new Date();
-      console.log("start:" + start_time)
-    };
-    finish.onclick = function(){
-      finish_time = new Date();
-      console.log("finish:" + finish_time)
-      total_time = finish_time - start_time;
-      alert("Congrats! You took" + " " + (total_time/600) + " " + "seconds.")
+
+    function listen() {
+      console.log(input.value)
+      var regex = new RegExp(input.value)
+      if ( text.match(regex)) { console.log("true")
+      } else {
+        console.log("false")
+      } 
+      if (text === input.value && done === false) {
+        finish_time = new Date()
+        wpm((finish_time - start_time)/1000)
+        done = true
+
+      }
     }
 
-    // complete = function(){
-    //   var copy = document.getElementById('paragraph').innerText
-      
-    // };
+    function wpm(time) {
+      var wpm = text.split(" ").length / (time / 60)
+      alert("You typed at " + parseInt(wpm) + "words per minute!")
+    }
+    
+    function start() {
+        setTimeout(function(){
+        start_time = new Date();
+      },3000);
+    }
+
   </script>
 
   <footer>  
