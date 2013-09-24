@@ -10,6 +10,8 @@ group :development do
   gem 'shotgun'
   gem 'sqlite3'
   gem 'random_data'
+  gem 'jasmine'
+
 end
 
 group :production do
