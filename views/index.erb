@@ -14,19 +14,19 @@
   
   </header>  
 
-  <div id="main">  
+  <div id="game">  
    <form>
-      <p class="gameData"><%= @paragraph %></p>
-      <textarea class="gameArea"></textarea>
+      <p id="gameData"><%= @paragraph %></p>
+      <textarea id="gameArea"></textarea>
     </form> 
-      <button class="gameFinish">Done!</button>
-    <div class="gameResults">
+      <button id="gameFinish">Done!</button>
+    <div id="gameResults">
     </div>
   </div>  
   
   <script type="text/javascript">
     document.onreadystatechange = function() {
-      typeRacer(document.getElementById('main'));
+      typeRacer(document);
     }
   </script>
 

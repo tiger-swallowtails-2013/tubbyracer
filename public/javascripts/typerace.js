@@ -1,8 +1,9 @@
 function typeRacer(container) {
   // alert(container.getElementByName('gameArea'))
-  var start = container.getElementsByClassName("gameArea")[0];
-  var finish = container.getElementsByClassName("gameFinish")[0];
-  var results = container.getElementsByClassName("gameResults")[0];
+  var start = container.getElementById("gameArea");
+  var finish = container.getElementById("gameFinish");
+  var results = container.getElementById("gameResults");
+  var game = container.getElementById("game")
 
   var start_time = 0;
 
@@ -10,6 +11,11 @@ function typeRacer(container) {
     start_time = new Date();
     // console.log("start:" + start_time);
   };
+
+
+  start.addEventListener('paste', function(){
+    game.innerHTML="<img src=/gifs/newman.gif>";
+  });
 
   finish.addEventListener('click', function() {
     finish_time = new Date();
