@@ -17,7 +17,7 @@ describe("Timer", function() {
 
     gameArea.onfocus();
 
-    submitButton.onclick();
+    submitButton.dispatchEvent(new Event('click'));
 
     expect(results.innerHTML).toMatch(/Congrats! You took \d+\.\d+ seconds\./);
   });
