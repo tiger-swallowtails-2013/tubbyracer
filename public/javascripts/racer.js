@@ -1,3 +1,9 @@
 function typeRacer(container){
-  console.log('executed');
+  var gameArea = container.querySelector("#gameArea");
+
+  initializeGame = function(){
+      gameArea.disabled = true;
+  }
+
+  initializeGame();
 };
