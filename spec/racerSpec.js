@@ -10,15 +10,16 @@ describe("typeracer", function(){
     return element;
   };
 
-  beforeEach(function){
+  beforeEach(function(){
     game = appendToDom('div', 'game');
     gameData = appendToDom('p', 'gameData', game);
     gameArea = appendToDom('textarea', 'gameArea', game);
 
     typeRacer(document);
-  };
+  });
 
   // afterEach(function){
   //   document.body.removeChild(game);
   // };
+
 });
