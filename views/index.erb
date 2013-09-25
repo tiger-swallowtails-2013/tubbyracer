@@ -2,51 +2,28 @@
 <html lang="en">  
 <head>  
   <meta charset="utf8">  
-
+  <script type="text/javascript" src="/javascripts/racer.js"></script>
   <title>Tubbyracer</title>  
 </head>  
 <body>  
 
-  <header>  
-
- 
+  <header>   
       <h1>TubbyRacer!</h1>  
- 
- 
   </header>  
 
-  <div id="main">  
-<!--    <p> Random Paragraph </p> -->
+  <div id="game">  
    <form action="/" method="post">
-
-      <p id="paragraph"><%= @paragraph %></p>
-      <input type="hidden" value=<% @paragraph %> />
-      <textarea name="input"></textarea>
-      <button name='submit'>Done!</button>
+      <p id="gameData"><%= @paragraph %></p>
+      <textarea name="gameArea"></textarea>
     </form> 
+    <button id="start">Start!</button>
   </div>  
-  
+
   <script type="text/javascript">
-    var start = document.getElementsByName('input')[0];
-    var start_time = 0;
-    var finish = document.getElementsByName('submit')[0];
-
-    start.onfocus = function(){
-      start_time = new Date();
-      console.log("start:" + start_time)
+    document.onreadystatechange = function(){
+      typeRacer(document);
     };
-    finish.onclick = function(){
-      finish_time = new Date();
-      console.log("finish:" + finish_time)
-      total_time = finish_time - start_time;
-      alert("Congrats! You took" + " " + (total_time/600) + " " + "seconds.")
-    }
-
-    // complete = function(){
-    //   var copy = document.getElementById('paragraph').innerText
-      
-    // };
-  </script>
+    </script>
 
   <footer>  
     
