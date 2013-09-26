@@ -18,7 +18,7 @@ describe("typeracer", function(){
     gameText = gameData.innerText = "This is the game text"
     userWrongInput =gameArea.innerText = "This is not supposed to match"
     userCorrectInput = gameArea.innerText = "This is the game text"
-    typeRacer(document);
+    typeRacer(document)
   });
 
   afterEach(function() {
@@ -57,7 +57,7 @@ describe("typeracer", function(){
     it("should call handleKeyPress", function(){
       spyOn(window, 'handleKeyPress');
       var keyDown = new Event('keydown');
-      gameArea.dispatchEvent(keyDown);
+      gameArea.   (keyDown);
       expect(window.handleKeyPress).toHaveBeenCalledWith(keyDown)
     });
 

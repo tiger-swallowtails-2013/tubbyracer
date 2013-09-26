@@ -1,9 +1,9 @@
-
-function typeRacer(container){
+function typeRacer(container) {
   var gameArea = container.querySelector('.gameArea')
   gameArea.addEventListener("keydown", function(e) {
-    handleKeyPress(e)
+    handleKeyPress(e);
   });
+}
 
 var timer = {
   tick: -3,
@@ -32,12 +32,12 @@ var timer = {
 }
 
 
+
 function getWhatUserIsSupposedToType() {
   return document.querySelector('.gameData').innerText;
 }
 
 function getWhatUserDoneDidSay() {
-  console.log(document.querySelector('.gameArea').value)
   return document.querySelector('.gameArea').value;
 
 }
