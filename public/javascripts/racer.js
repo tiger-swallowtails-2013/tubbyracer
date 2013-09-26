@@ -1,9 +1,14 @@
-
-function typeRacer(container){
-  var gameArea = container.querySelector('.gameArea')
+function typeRacer(container) {
+  var gameArea = container.querySelector('.mainArea')
   gameArea.addEventListener("keydown", function(e) {
-    handleKeyPress(e)
+    game.handleKeyPress(e);
   });
+
+  var buttonClick = container.querySelector('.mainStart')
+  buttonClick.addEventListener("click", function(e) {
+    game.handleButtonClick(e);
+  })
+}
 
 var timer = {
   tick: -3,
@@ -15,7 +20,7 @@ var timer = {
     else if(this.tick < 0){
       return 'before'
     }
-    else    {
+    else{
       return 'during'
     }
   },
@@ -31,7 +36,7 @@ var timer = {
   }
 }
 
-var accuracyTracker = {
+var wordTracker = {
   correctWord: "",
   typedWord: "",
   addLetter: function(letter){
@@ -49,38 +54,38 @@ var accuracyTracker = {
       return true;
     }
     else{
-      return false;  
+      return false;
     }
   }
 }
 
-function typeRacer(container){
-  var gameArea = container.querySelector("#gameArea");
-  gameArea.disabled = true;
-};
+var game = {
 
-function getWhatUserIsSupposedToType() {
-  return document.querySelector('.gameData').innerText;
+  begin: function() {
+    timer.reboot();
+  },
+  getWhatUserIsSupposedToType: function() {
+    return document.querySelector('.mainData').innerText;
+  },
+  getWhatUserDoneDidSay: function() {
+    return document.querySelector('.mainArea').value;
+  },
+  compareUserInputToExpectedInput: function(gameText, userText) {
+    return gameText.slice(0, userText.length) == userText
+  },
+  handleKeyPress: function(evnt) {
+    // var userInput = getWhatUserDoneDidSay()
+    // var gameText = getWhatUserIsSupposedToType()
+    // return compareUserInputToExpectedInput(gameText,userInput)
+  },
+  handleButtonClick: function(evnt) {
+    this.begin()
+  },
+  currentWord: function() {
+    var gameData = this.getWhatUserIsSupposedToType()
+    return gameData.split(" ")[0]
+  }
 }
-
-function getWhatUserDoneDidSay() {
-  console.log(document.querySelector('.gameArea').value)
-  return document.querySelector('.gameArea').value;
-
-}
-
-function compareUserInputToExpectedInput(gameText, userText) {
-  return gameText.slice(0, userText.length) == userText
-}
-
-function handleKeyPress(evnt) {
-
-  var userInput = getWhatUserDoneDidSay()
-  var gameText = getWhatUserDoneDidSay()
-  return compareUserInputToExpectedInput(gameText,userInput)
-}
-
-
   //  String.prototype.matchData = function (str){
   //   return this.slice(0, str.length) == str;
 
