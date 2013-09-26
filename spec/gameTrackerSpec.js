@@ -40,10 +40,7 @@ describe("game tracker", function(){
     it ("should hold the first word in the main sentence", function(){
       expect(game.currentWord()).toEqual(mainText.split(" ")[0])
     })
-    // it ("should start the timer countdown", function(){
-    //   game.begin();
-    //   expect(timer.state()).toEqual('before')
-    // })
+
   })
 
   describe("start typing", function(){
@@ -54,34 +51,7 @@ describe("game tracker", function(){
       mainArea.dispatchEvent(keyDownEvent)
       expect(game.handleKeyPress).toHaveBeenCalledWith(keyDownEvent)
     })
-    // it ("should add letters to wordTracker", function(){
 
-    // })
-
-    // it ("should retrieve the user input", function() {
-    //   var userInput = game.getWhatUserDoneDidSay()
-    //   expect(userCorrectInput).toEqual(userInput)
-    // })
-    // it ("should recognize the first correct word", function(){
-    //   var userInput = game.getWhatUserDoneDidSay()
-    //   var currentGameWord = game.currentWord()
-    //   game.compareUserInputToExpectedInput(currentGameWord, userInput).toBeTruthy
-    // })
-
-
-
-
-    // describe("track user progress", function(){
-    //   it ("should track words already entered", function(){
-
-    //   })
-    //   it ("should track the current word", function(){
-
-    //   })
-    //   it ("should track words yet to be entered", function(){
-
-    //   })
-    // })
 
   })
 })
