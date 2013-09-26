@@ -32,4 +32,8 @@ describe("accuracy tracker", function(){
     accuracyTracker.typedWord = 'wood';
     expect(accuracyTracker.finished()).toEqual(true)
   });
+
+  it("is going to let me test jasmine matchers", function(){
+    expect(10).toBe(5*2);
+  });
 });
