@@ -24,6 +24,29 @@ var timer = {
   }
 }
 
+var accuracyTracker = {
+  correctWord: "",
+  typedWord: "",
+  addLetter: function(letter){
+    this.typedWord+=letter;
+  },
+  removeLetter: function(){
+    this.typedWord = this.typedWord.slice(0, (this.typedWord.length-1))
+  },
+  finished: function(){
+    return (this.correctWord == this.typedWord)
+  },
+  onTrack: function(){
+    var test = new RegExp(typedWord)
+    if(correctWord.match(test)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+}
+
 function typeRacer(container){
   var gameArea = container.querySelector("#gameArea");
   gameArea.disabled = true;
