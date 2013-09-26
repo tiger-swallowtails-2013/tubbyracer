@@ -21,9 +21,11 @@ describe("typeracer", function(){
     typeRacer(document);
   });
 
-  // afterEach(function){
-  //   document.body.removeChild(game);
-  // };
+  afterEach(function() {
+    document.body.removeChild(game);
+  });
+
+
 
   describe("Getting data", function() {
     it("should get the gameText from the DOM", function(){
@@ -48,10 +50,32 @@ describe("typeracer", function(){
 
     it("returns false if the user input does not match the original string", function(){
       expect(compareUserInputToExpectedInput(gameText, userWrongInput)).toBeFalsy()
-
     });
-
   });
 
+  describe("when the user types something", function(){
+    it("should call handleKeyPress", function(){
+      spyOn(window, 'handleKeyPress');
+      var keyDown = new Event('keydown');
+      gameArea.dispatchEvent(keyDown);
+      expect(window.handleKeyPress).toHaveBeenCalledWith(keyDown)
+    });
+
+
+    it("should get the user input from the DOM", function() {
+      spyOn(window, 'getWhatUserDoneDidSay');
+      gameArea.dispatchEvent(new Event('keydown'));
+      expect(window.getWhatUserDoneDidSay).toHaveBeenCalled()
+    })
+
+    it("should return true if the userInput matches the gameData", function() {
+      var keyDown = new Event('keydown');
+      gameArea.dispatchEvent(keyDown);
+      expect(handleKeyPress(keyDown)).toBeTruthy()
+    })
+
+   it
+
+  });
 
 });
