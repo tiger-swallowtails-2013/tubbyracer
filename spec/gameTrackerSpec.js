@@ -48,12 +48,15 @@ describe("game tracker", function(){
 
   describe("start typing", function(){
 
-    it ("it should listen for keystrokes", function(){
+    it ("should listen for keystrokes", function(){
       spyOn(game, 'handleKeyPress')
       var keyDownEvent = new Event('keydown')
       mainArea.dispatchEvent(keyDownEvent)
       expect(game.handleKeyPress).toHaveBeenCalledWith(keyDownEvent)
     })
+    // it ("should add letters to wordTracker", function(){
+
+    // })
 
     // it ("should retrieve the user input", function() {
     //   var userInput = game.getWhatUserDoneDidSay()
