@@ -14,7 +14,7 @@ var timer = {
   tick: -3,
   stop: false,
   state: function(){
-    if(stop){
+    if(this.stop == true){
       return 'after'
     }
     else if(this.tick < 0){
@@ -25,14 +25,13 @@ var timer = {
     }
   },
   count: function(){
-    this.tick++;
+    this.stop ? this.tick : this.tick++;
   },
   end: function(){
     this.stop = true;
   },
   reboot: function(){
     this.tick = -3;
-    this.state = 'before';
     this.stop = false;
   }
 }
@@ -47,11 +46,11 @@ var wordTracker = {
     this.typedWord = this.typedWord.slice(0, (this.typedWord.length-1))
   },
   finished: function(){
-    return (this.correctWord == this.typedWord)
+    return (this.correctWord === this.typedWord)
   },
   onTrack: function(){
-    var test = new RegExp(typedWord)
-    if(correctWord.match(test)){
+    var test = new RegExp(this.typedWord)
+    if(this.correctWord.match(test)){
       return true;
     }
     else{
@@ -89,4 +88,5 @@ var game = {
 }
   //  String.prototype.matchData = function (str){
   //   return this.slice(0, str.length) == str;
+
 
