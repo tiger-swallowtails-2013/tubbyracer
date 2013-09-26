@@ -40,15 +40,3 @@ describe("timer", function(){
     });
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
