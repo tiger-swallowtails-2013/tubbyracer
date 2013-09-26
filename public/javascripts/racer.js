@@ -1,7 +1,7 @@
 function typeRacer(container) {
   var gameArea = container.querySelector('.mainArea')
   gameArea.addEventListener("keydown", function(e) {
-    handleKeyPress(e);
+    game.handleKeyPress(e);
   });
 
   var buttonClick = container.querySelector('.mainStart')
@@ -75,9 +75,9 @@ var game = {
     return gameText.slice(0, userText.length) == userText
   },
   handleKeyPress: function(evnt) {
-    var userInput = getWhatUserDoneDidSay()
-    var gameText = getWhatUserIsSupposedToType()
-    return compareUserInputToExpectedInput(gameText,userInput)
+    // var userInput = getWhatUserDoneDidSay()
+    // var gameText = getWhatUserIsSupposedToType()
+    // return compareUserInputToExpectedInput(gameText,userInput)
   },
   handleButtonClick: function(evnt) {
     this.begin()
