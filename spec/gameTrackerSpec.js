@@ -15,10 +15,12 @@ describe("game tracker", function(){
     mainData = appendToDom('p', 'mainData', main);
     mainArea = appendToDom('textarea', 'mainArea', main);
     mainButton = appendToDom('button', 'mainStart', main);
+    results = appendToDom('div', 'mainResults', main);
+    // class .incorrect identifies typed text is off track - change color to red in css
 
     mainText = mainData.innerText = "This is the game text"
-    userWrongInput =mainArea.innerText = "This is not supposed to match"
     userCorrectInput = mainArea.innerText = "This is the game text"
+
     typeRacer(document)
   });
 
@@ -28,7 +30,7 @@ describe("game tracker", function(){
 
   describe("before start typing", function(){
     it ("should retrieve main sentence ", function(){
-      var gameSentence = game.getWhatUserIsSupposedToType()
+      var gameSentence = tracker.getWhatUserIsSupposedToType()
       expect(mainText).toEqual(gameSentence)
     })
     it ("should listen for the button click event to start the countdown", function(){
@@ -36,9 +38,6 @@ describe("game tracker", function(){
       var buttonClickEvent = new Event('click')
       mainButton.dispatchEvent(buttonClickEvent)
       expect(game.handleButtonClick).toHaveBeenCalledWith(buttonClickEvent)
-    })
-    it ("should hold the first word in the main sentence", function(){
-      expect(game.currentWord()).toEqual(mainText.split(" ")[0])
     })
 
   })
@@ -52,6 +51,44 @@ describe("game tracker", function(){
       expect(game.handleKeyPress).toHaveBeenCalledWith(keyDownEvent)
     })
 
+    it ("should match the user input against the given sentence", function(){
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(tracker.compareUserInputToExpectedInput()).toBeTruthy()
+    })
 
+    it ("should know if sentence doesn't match", function(){
+      mainArea.innerText = "This is not supposed to match"
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(tracker.compareUserInputToExpectedInput()).toBeFalsy()
+    })
+    it ("should tell the user if the sentence doesn't match", function(){
+      mainArea.innerText = "This is not supposed to match"
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(mainArea.className).toEqual('mainArea incorrect')
+    })
+    it ("should tell the user if the sentence does match", function(){
+      mainArea.innerText = "This is the ga"
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(mainArea.className).toEqual('mainArea correct')
+    })
+    it ("should constantly be adjusting between matching and not matching", function(){
+      mainArea.innerText = "This is not supposed to match"
+      mainArea.dispatchEvent(new Event('keydown'))
+      mainArea.innerText = "This is the ga"
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(mainArea.className).toEqual('mainArea correct')
+    })
+    it ("should tell the user when the entire sentence matched", function(){
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(tracker.finish()).toBeTruthy()
+    })
   })
+  describe("game complete", function(){
+    it ("should display the results once the game is complete", function(){
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(results.innerText).toMatch("words per minute!")
+    })
+  })
+
+  
 })
