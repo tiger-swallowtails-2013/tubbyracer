@@ -72,12 +72,23 @@ var game = {
       timer.end();
       this.displayResults(this.calculateResults())
     } else {
-    tracker.compareUserInputToExpectedInput()
+
+      if(tracker.compareUserInputToExpectedInput()) {
+        this.showCorrect()
+      } else {
+        this.showMistake()
+      }
     }
   },
   handleButtonClick: function(evnt) {
     this.begin();
+  },
+
+  showMistake: function() {
+    document.querySelector('.mainArea').className = 'mainArea incorrect';
+  },
+
+  showCorrect: function() {
+    document.querySelector('.mainArea').className = 'mainArea correct';
   }
-
-
 }
