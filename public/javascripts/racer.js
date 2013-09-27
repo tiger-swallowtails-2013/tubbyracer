@@ -11,29 +11,19 @@ function typeRacer(container) {
 }
 
 var timer = {
-  tick: -3,
-  stop: false,
-  state: function(){
-    if(this.stop == true){
-      return 'after'
-    }
-    else if(this.tick < 0){
-      return 'before'
-    }
-    else{
-      return 'during'
-    }
-  },
-  count: function(){
-    this.stop ? this.tick : this.tick++;
+  startTime: null,
+  endTime: null,
+
+  start: function(){
+    this.startTime = new Date()
   },
   end: function(){
-    this.stop = true;
+    this.endTime = new Date()
   },
-  reboot: function(){
-    this.tick = -3;
-    this.stop = false;
+  timeElapsed: function(){
+    return (this.endTime - this.startTime)/1000
   }
+
 }
 
 var tracker = {
@@ -43,6 +33,7 @@ var tracker = {
   getWhatUserDoneDidSay: function() {
     return document.querySelector('.mainArea').value;
   },
+
   compareUserInputToExpectedInput: function() {
     var userInput = this.getWhatUserDoneDidSay()
     var gameText = this.getWhatUserIsSupposedToType()
@@ -56,21 +47,21 @@ var tracker = {
 var game = {
 
   begin: function() {
-    timer.reboot();
+    timer.start()
   },
 
-  displayResults: function(wpm) {
-    document.querySelector('.mainResults').innerText = "You typed at " + wpm + " words per minute!  You go Glen Coco";
+  calculateWPM: function(){
+    return ((tracker.getWhatUserIsSupposedToType().split(" ").length)/(timer.timeElapsed()/60))
   },
 
-  calculateResults: function(){
-    return (tracker.getWhatUserIsSupposedToType().length)/(timer.tick/60)
+  displayResults: function() {
+    document.querySelector('.mainResults').innerText = "You typed at " + this.calculateWPM() + " words per minute!  You go Glen Coco";
   },
 
   handleKeyPress: function(evnt) {
     if (tracker.finish()) {
-      timer.end();
-      this.displayResults(this.calculateResults())
+      timer.end()
+      this.displayResults()
     } else {
 
       if(tracker.compareUserInputToExpectedInput()) {
@@ -90,5 +81,9 @@ var game = {
 
   showCorrect: function() {
     document.querySelector('.mainArea').className = 'mainArea correct';
+  },
+
+  getTextCharLength: function() {
+    return (tracker.getWhatUserIsSupposedToType().split("").length / 100) * 10
   }
 }
