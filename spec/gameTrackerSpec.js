@@ -15,7 +15,7 @@ describe("game tracker", function(){
     mainData = appendToDom('p', 'mainData', main);
     mainArea = appendToDom('textarea', 'mainArea', main);
     mainButton = appendToDom('button', 'mainStart', main);
-    results = appendToDom('div', 'results', main);
+    results = appendToDom('div', 'mainResults', main);
 
     mainText = mainData.innerText = "This is the game text"
     userCorrectInput = mainArea.innerText = "This is the game text"
@@ -55,19 +55,20 @@ describe("game tracker", function(){
       expect(tracker.compareUserInputToExpectedInput()).toBeTruthy()
     })
 
-    it("should tell the user if the sentence doesn't match", function(){
+    it ("should tell the user if the sentence doesn't match", function(){
       mainArea.innerText = "This is not supposed to match"
       mainArea.dispatchEvent(new Event('keydown'))
       expect(tracker.compareUserInputToExpectedInput()).toBeFalsy()
     })
-
-    it("should tell the user when the entire sentence matched", function(){
+    it ("should tell the user when the entire sentence matched", function(){
       mainArea.dispatchEvent(new Event('keydown'))
       expect(tracker.finish()).toBeTruthy()
     })
-    it("should display the results once the game is complete", function(){
+  })
+  describe("game complete", function(){
+    it ("should display the results once the game is complete", function(){
       mainArea.dispatchEvent(new Event('keydown'))
-      expect(results.innerText).not.toBeNull()
+      expect(results.innerText).toMatch("words per minute!")
     })
   })
 })

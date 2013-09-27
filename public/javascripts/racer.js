@@ -60,7 +60,7 @@ var game = {
   },
 
   displayResults: function(wpm) {
-    document.querySelector('.results').innerText = "You typed at " + wpm + " words per minute!  You go Glen Coco";
+    document.querySelector('.mainResults').innerText = "You typed at " + wpm + " words per minute!  You go Glen Coco";
   },
 
   calculateResults: function(){
@@ -78,4 +78,6 @@ var game = {
   handleButtonClick: function(evnt) {
     this.begin();
   }
+
+
 }
