@@ -1,44 +1,25 @@
 describe("timer", function(){
+  it ("should have startTime to be null when not started",function() {
+    expect(timer.startTime).toBeNull()
+  })
 
-  beforeEach(function(){
-    timer.reboot();
-  });
+  it("should have a startTime value after started", function(){
+    timer.start()
+    expect(timer.startTime).not.toBeNull()
+  })
 
-  describe("before the race begins", function(){
-    it("should initialize tick at -3", function(){
-      expect(timer.tick).toEqual(-3);
-    });
-    it("should return a state of 'before'", function(){
-      expect(timer.state()).toEqual('before');
-    });
-    it("should increment tick by 1", function(){
-      timer.count();
-      expect(timer.tick).toEqual(-2);
-    });
-  });
-  describe("during the race", function(){
-    it("should return a state of 'during'", function(){
-      for(var i = 0; i < 10; i++){
-        timer.count();
-      }
-      expect(timer.state()).toEqual('during');
-    });
-  });
-  describe("after the race is finished", function(){
-    it("should return a state of 'after'", function(){
-      timer.end();
-      expect(timer.state()).toEqual('after');
-    });
-    it("should no longer increment tick", function(){
-      for(var i = 0; i < 10; i++){
-        timer.count();
-      }
-      var final_time = timer.tick;
-      console.log(timer.tick)
-      timer.end();
-      timer.count();
-      console.log(timer.tick)
-      expect(timer.tick).toEqual(final_time);
-    });
-  });
+  it("should have an endTime to be null when not finished", function(){
+    expect(timer.endTime).toBeNull()
+  })
+
+  it("should have an endTime when finished", function(){
+    timer.end()
+    expect(timer.endTime).not.toBeNull()
+  })
+  it("should return the difference between startTime and endTime", function(){
+    timer.start()
+    timer.end()
+    expect(timer.timeElapsed()).toEqual((timer.endTime - timer.startTime)/1000)
+  })
+  
 });
