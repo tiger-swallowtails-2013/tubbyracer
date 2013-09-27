@@ -84,6 +84,11 @@ describe("game tracker", function(){
     })
   })
   describe("game complete", function(){
+    it ("should calculate the words per minute typed", function(){
+      timer.startTime = 0
+      timer.endTime = 60000
+      expect(game.calculateWPM()).toEqual((mainText.split(" ").length)/(timer.timeElapsed()/60))
+    })
     it ("should display the results once the game is complete", function(){
       mainArea.dispatchEvent(new Event('keydown'))
       expect(results.innerText).toMatch("words per minute!")
