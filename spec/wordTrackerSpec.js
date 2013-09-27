@@ -1,6 +1,14 @@
 describe("word tracker", function(){
-  wordTracker.correctWord = 'wood';
-  wordTracker.typedWord = 'wo'
+
+  beforeEach(function(){
+    wordTracker.correctWord = 'wood';
+    wordTracker.typedWord = 'wo'
+  });
+
+  afterEach(function(){
+    this.correctWord = "";
+    this.typedWord = "";
+  });
 
   it("should know the correct word", function(){
     expect(wordTracker.correctWord).toEqual("wood");
@@ -14,7 +22,7 @@ describe("word tracker", function(){
   });
   it("should remove a letter from the word being typed", function(){
     wordTracker.removeLetter();
-    expect(wordTracker.typedWord).toEqual('wo');
+    expect(wordTracker.typedWord).toEqual('w');
   });
   describe("word is incomplete", function(){
     it("should know if the word is incomplete", function(){

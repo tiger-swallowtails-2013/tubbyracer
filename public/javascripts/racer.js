@@ -36,26 +36,20 @@ var timer = {
   }
 }
 
-var wordTracker = {
-  correctWord: "",
-  typedWord: "",
-  addLetter: function(letter){
-    this.typedWord+=letter;
+var tracker = {
+  getWhatUserIsSupposedToType: function() {
+    return document.querySelector('.mainData').innerText;
   },
-  removeLetter: function(){
-    this.typedWord = this.typedWord.slice(0, (this.typedWord.length-1))
+  getWhatUserDoneDidSay: function() {
+    return document.querySelector('.mainArea').value;
   },
-  finished: function(){
-    return (this.correctWord === this.typedWord)
+  compareUserInputToExpectedInput: function() {
+    var userInput = this.getWhatUserDoneDidSay()
+    var gameText = this.getWhatUserIsSupposedToType()
+    return gameText.slice(0, userInput.length) == userInput
   },
-  onTrack: function(){
-    var test = new RegExp(this.typedWord)
-    if(this.correctWord.match(test)){
-      return true;
-    }
-    else{
-      return false;
-    }
+  finish: function() {
+    return this.getWhatUserDoneDidSay() == this.getWhatUserIsSupposedToType()
   }
 }
 
@@ -64,29 +58,24 @@ var game = {
   begin: function() {
     timer.reboot();
   },
-  getWhatUserIsSupposedToType: function() {
-    return document.querySelector('.mainData').innerText;
+
+  displayResults: function(wpm) {
+    document.querySelector('.results').innerText = "You typed at " + wpm + " words per minute!  You go Glen Coco";
   },
-  getWhatUserDoneDidSay: function() {
-    return document.querySelector('.mainArea').value;
+
+  calculateResults: function(){
+    return (tracker.getWhatUserIsSupposedToType().length)/(timer.tick/60)
   },
-  compareUserInputToExpectedInput: function(gameText, userText) {
-    return gameText.slice(0, userText.length) == userText
-  },
+
   handleKeyPress: function(evnt) {
-    // var userInput = getWhatUserDoneDidSay()
-    // var gameText = getWhatUserIsSupposedToType()
-    // return compareUserInputToExpectedInput(gameText,userInput)
+    if (tracker.finish()) {
+      timer.end();
+      this.displayResults(this.calculateResults())
+    } else {
+    tracker.compareUserInputToExpectedInput()
+    }
   },
   handleButtonClick: function(evnt) {
-    this.begin()
-  },
-  currentWord: function() {
-    var gameData = this.getWhatUserIsSupposedToType()
-    return gameData.split(" ")[0]
+    this.begin();
   }
 }
-  //  String.prototype.matchData = function (str){
-  //   return this.slice(0, str.length) == str;
-
-
