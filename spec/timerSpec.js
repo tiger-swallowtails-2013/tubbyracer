@@ -34,10 +34,8 @@ describe("timer", function(){
         timer.count();
       }
       var final_time = timer.tick;
-      console.log(timer.tick)
       timer.end();
       timer.count();
-      console.log(timer.tick)
       expect(timer.tick).toEqual(final_time);
     });
   });

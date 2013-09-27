@@ -86,7 +86,16 @@ var game = {
     return gameData.split(" ")[0]
   }
 }
-  //  String.prototype.matchData = function (str){
-  //   return this.slice(0, str.length) == str;
+
+var tubbyObj = {
+  position: 0,
+  element: function(){
+    return document.querySelector('.tubby');
+  },
+  moveTubby: function(amount) {
+    this.position += amount;
+    this.element().style.left = this.position + "%";
+  }
+}
 
 

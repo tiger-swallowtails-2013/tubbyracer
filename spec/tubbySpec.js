@@ -29,8 +29,13 @@ describe("tubby tests", function(){
     expect (tubbyPos).toEqual('0%');
 
   })
-  describe("tubby moves", function(){
-    it("should by a prespecified amt of pixels from left to right")
-
-  })
+  // describe("tubby moves", function(){
+    
+    it("should move by a prespecified amt of pixels from left to right", function(){
+      var initial_position = tubbyObj.position
+      var amt_to_move_by = 10
+      tubbyObj.moveTubby(amt_to_move_by)
+      expect(tubbyObj.position).toEqual(initial_position + amt_to_move_by)
+    })
+  // })
 })
