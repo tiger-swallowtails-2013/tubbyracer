@@ -16,6 +16,7 @@ describe("game tracker", function(){
     mainArea = appendToDom('textarea', 'mainArea', main);
     mainButton = appendToDom('button', 'mainStart', main);
     results = appendToDom('div', 'mainResults', main);
+    // class .incorrect identifies typed text is off track - change color to red in css
 
     mainText = mainData.innerText = "This is the game text"
     userCorrectInput = mainArea.innerText = "This is the game text"
@@ -55,10 +56,27 @@ describe("game tracker", function(){
       expect(tracker.compareUserInputToExpectedInput()).toBeTruthy()
     })
 
-    it ("should tell the user if the sentence doesn't match", function(){
+    it ("should know if sentence doesn't match", function(){
       mainArea.innerText = "This is not supposed to match"
       mainArea.dispatchEvent(new Event('keydown'))
       expect(tracker.compareUserInputToExpectedInput()).toBeFalsy()
+    })
+    it ("should tell the user if the sentence doesn't match", function(){
+      mainArea.innerText = "This is not supposed to match"
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(mainArea.className).toEqual('mainArea incorrect')
+    })
+    it ("should tell the user if the sentence does match", function(){
+      mainArea.innerText = "This is the ga"
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(mainArea.className).toEqual('mainArea correct')
+    })
+    it ("should constantly be adjusting between matching and not matching", function(){
+      mainArea.innerText = "This is not supposed to match"
+      mainArea.dispatchEvent(new Event('keydown'))
+      mainArea.innerText = "This is the ga"
+      mainArea.dispatchEvent(new Event('keydown'))
+      expect(mainArea.className).toEqual('mainArea correct')
     })
     it ("should tell the user when the entire sentence matched", function(){
       mainArea.dispatchEvent(new Event('keydown'))
@@ -71,4 +89,6 @@ describe("game tracker", function(){
       expect(results.innerText).toMatch("words per minute!")
     })
   })
+
+  
 })
