@@ -62,11 +62,17 @@ var game = {
 
   
   },
+  
   handleButtonClick: function(evnt) {
     this.begin();
   },
 
-  showMistake: function() {
+  currentWord: function() {
+    var gameData = this.getWhatUserIsSupposedToType()
+    return gameData.split(" ")[0]
+  },
+
+    showMistake: function() {
     document.querySelector('.mainArea').className = 'mainArea incorrect';
   },
 
@@ -94,4 +100,15 @@ function typeRacer(container) {
     });
 
 
+}
+
+var tubbyObj = {
+  position: 0,
+  element: function(){
+    return document.querySelector('.tubby');
+  },
+  moveTubby: function(amount) {
+    this.position += amount;
+    this.element().style.left = this.position + "%";
+  }
 }
