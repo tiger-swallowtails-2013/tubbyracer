@@ -3,6 +3,7 @@
 <head>  
   <meta charset="utf8">  
   <script type="text/javascript" src="/javascripts/racer.js"></script>
+  <link href="/style.css" rel="stylesheet">  
   <title>Tubbyracer</title>  
 </head>  
 <body>  
@@ -11,16 +12,20 @@
       <h1>TubbyRacer!</h1>  
   </header>  
 
-  <div class="tubby">
-  </div>
-  
 
-  <div id="game">  
-   <form action="/" method="post">
-      <p id="gameData"><%= @paragraph %></p>
-      <textarea name="gameArea"></textarea>
-    </form> 
-    <button id="start">Start!</button>
+  <div class="main">  
+
+    <div class="tubby">
+    </div>
+    
+
+
+     <form action="/" method="post">
+        <p class="mainData"><%= @paragraph %></p>
+        <textarea class="mainArea"></textarea>
+      </form> 
+      <div class="mainResults"></div>
+      <button class="mainStart">Start!</button>
   </div>  
 
   <script type="text/javascript">

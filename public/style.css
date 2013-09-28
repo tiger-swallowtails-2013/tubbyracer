@@ -1,0 +1,7 @@
+
+.mainArea.correct {
+   background-color: green;
+}
+.mainArea.incorrect {
+  background-color: red;
+}
