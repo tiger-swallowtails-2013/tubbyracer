@@ -1,14 +1,4 @@
-function typeRacer(container) {
-  var gameArea = container.querySelector('.mainArea')
-  gameArea.addEventListener("keydown", function(e) {
-    game.handleKeyPress(e);
-  });
 
-  var buttonClick = container.querySelector('.mainStart')
-  buttonClick.addEventListener("click", function(e) {
-    game.handleButtonClick(e);
-  })
-}
 
 var timer = {
   startTime: null,
@@ -39,13 +29,13 @@ var tracker = {
     var gameText = this.getWhatUserIsSupposedToType()
     return gameText.slice(0, userInput.length) == userInput
   },
-  finish: function() {
+  isFinished: function() {
     return this.getWhatUserDoneDidSay() == this.getWhatUserIsSupposedToType()
   }
 }
 
 var game = {
-
+ 
   begin: function() {
     timer.start()
   },
@@ -59,17 +49,18 @@ var game = {
   },
 
   handleKeyPress: function(evnt) {
-    if (tracker.finish()) {
-      timer.end()
-      this.displayResults()
-    } else {
-
       if(tracker.compareUserInputToExpectedInput()) {
         this.showCorrect()
       } else {
         this.showMistake()
       }
-    }
+
+      if (tracker.isFinished()) {
+        timer.end();
+        this.displayResults()
+      } 
+
+  
   },
   handleButtonClick: function(evnt) {
     this.begin();
@@ -86,4 +77,21 @@ var game = {
   getTextCharLength: function() {
     return (tracker.getWhatUserIsSupposedToType().split("").length / 100) * 10
   }
+
+}
+
+function typeRacer(container) {
+
+    var gameArea = container.querySelector('.mainArea')
+    gameArea.addEventListener("keyup", function(e) {
+      console.log(tracker.isFinished())
+      game.handleKeyPress(e);
+    });
+
+    var buttonClick = container.querySelector('.mainStart')
+    buttonClick.addEventListener("click", function(e) {
+      game.handleButtonClick(e);
+    });
+
+
 }
