@@ -4,13 +4,22 @@ var timer = {
   startTime: null,
   endTime: null,
 
-  start: function(){
+  startIt: function(){
+    var textbox = document.querySelector('.mainArea')
     this.startTime = new Date()
+    setTimeout(function() {
+      textbox.disabled=false
+      textbox.focus()
+    }, 2000)
+    
   },
-  end: function(){
+
+  endIt: function(){
     this.endTime = new Date()
   },
   timeElapsed: function(){
+    console.log(this.endTime)
+    console.log(this.startTime)
     return (this.endTime - this.startTime)/1000
   }
 
@@ -40,11 +49,13 @@ var tracker = {
 var game = {
  
   begin: function() {
-    timer.start()
+    timer.startIt()
   },
 
   calculateWPM: function(){
-    return ((tracker.getWhatUserIsSupposedToType().split(" ").length)/(timer.timeElapsed()/60))
+    console.log("words: " + tracker.getWhatUserIsSupposedToType().split(" ").length)
+    console.log("time: " + timer.timeElapsed())
+    return Math.round((tracker.getWhatUserIsSupposedToType().split(" ").length)/(timer.timeElapsed()/60))
   },
 
   displayResults: function() {
@@ -52,7 +63,6 @@ var game = {
   },
 
   handleKeyPress: function(evnt) {
-      console.log(tracker.getPercentDone())
       if(tracker.compareUserInputToExpectedInput()) {
         this.showCorrect()
         tubbyObj.moveTubby(tracker.getPercentDone()*80)
@@ -61,7 +71,9 @@ var game = {
       }
 
       if (tracker.isFinished()) {
-        timer.end();
+        // console.log(timer.startTime)
+        // console.log(timer.end)
+        timer.endIt();
         this.displayResults()
       } 
 
@@ -95,7 +107,6 @@ function typeRacer(container) {
 
     var gameArea = container.querySelector('.mainArea')
     gameArea.addEventListener("keyup", function(e) {
-      console.log(tracker.isFinished())
       game.handleKeyPress(e);
     });
 

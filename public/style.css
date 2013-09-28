@@ -12,3 +12,7 @@
 .tubby {
   position:absolute;
 }
+
+.hidden{
+  display:none;
+}
