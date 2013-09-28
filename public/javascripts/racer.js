@@ -51,7 +51,9 @@ var game = {
   handleKeyPress: function(evnt) {
       if(tracker.compareUserInputToExpectedInput()) {
         this.showCorrect()
+        tubbyObj.moveTubby(1)
       } else {
+        tubbyObj.moveTubby(-1)
         this.showMistake()
       }
 

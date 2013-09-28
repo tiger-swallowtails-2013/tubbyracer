@@ -1,7 +1,14 @@
+.main {
+  margin-top:150px;
+}
 
 .mainArea.correct {
    background-color: green;
 }
 .mainArea.incorrect {
   background-color: red;
+}
+
+.tubby {
+  position:absolute;
 }
