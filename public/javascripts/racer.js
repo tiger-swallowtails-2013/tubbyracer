@@ -31,6 +31,9 @@ var tracker = {
   },
   isFinished: function() {
     return this.getWhatUserDoneDidSay() == this.getWhatUserIsSupposedToType()
+  },
+  getPercentDone: function(){
+    return this.getWhatUserDoneDidSay().length/this.getWhatUserIsSupposedToType().length;
   }
 }
 
@@ -49,11 +52,11 @@ var game = {
   },
 
   handleKeyPress: function(evnt) {
+      console.log(tracker.getPercentDone())
       if(tracker.compareUserInputToExpectedInput()) {
         this.showCorrect()
-        tubbyObj.moveTubby(1)
+        tubbyObj.moveTubby(tracker.getPercentDone()*80)
       } else {
-        tubbyObj.moveTubby(-1)
         this.showMistake()
       }
 
@@ -110,7 +113,7 @@ var tubbyObj = {
     return document.querySelector('.tubby');
   },
   moveTubby: function(amount) {
-    this.position += amount;
+    this.position = amount;
     this.element().style.left = this.position + "%";
   }
 }
